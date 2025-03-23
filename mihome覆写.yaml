@@ -1,16 +1,22 @@
-# https://mihomo.party/docs/guide/override/yaml
-p:
+
+maoDian:
+  pu: &pu
+    type: select
+    url: "https://www.gstatic.com/generate_204"
+    interval: 360
+  puAuto: &puAuto
+    <<: *pu
+    type: url-test
+    tolerance: 50
   p1: &p1
-    type: select
-    url: "https://www.gstatic.com/generate_204"
-    interval: 360
+    <<: *pu
     proxies:
-      - 自动选择1
-      - 自动选择2
-      - 手动切换1
-      - 手动切换2
-      - 全球直连
-      - 自建节点
+      - 🚀自动选择1
+      - 🚀自动选择2
+      - ️🔘手动切换1
+      - ️🔘手动切换2
+      - 🎯全球直连
+      - 💎自建节点
       # 
       - 🇭🇰香港
       - 🇹🇼台湾
@@ -18,21 +24,17 @@ p:
       - 🇺🇸美国
       - 🇸🇬新加坡
       - 🇰🇷韩国
-
-
   p2: &p2
-    type: select
-    url: "https://www.gstatic.com/generate_204"
-    interval: 360
+    <<: *pu
     proxies:
-      - 国际专线
-      - 大陆专线
-      - 自动选择1
-      - 自动选择2
-      - 手动切换1
-      - 手动切换2
-      - 全球直连
-      - 自建节点
+      - 🗺️国际专线
+      - 🇨🇳大陆专线
+      - 🚀自动选择1
+      - 🚀自动选择2
+      - ️🔘手动切换1
+      - ️🔘手动切换2
+      - 🎯全球直连
+      - 💎自建节点
       # 
       - 🇭🇰香港
       - 🇹🇼台湾
@@ -40,91 +42,48 @@ p:
       - 🇺🇸美国
       - 🇸🇬新加坡
       - 🇰🇷韩国
+  ip: &ip { type: http, interval: 86400, behavior: ipcidr, format: text }
+  domain: &domain { type: http, interval: 86400, behavior: domain, format: text }
 
 proxy-groups:
-  - name: 漏网之鱼
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/refs/heads/master/IconSet/Color/Final.png"
+  - name: 🐟漏网之鱼
     <<: *p2
 
-  - name: 国际专线
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/refs/heads/master/IconSet/Color/World_Map.png"
+  - name: 🗺️国际专线
     <<: *p1
 
-  - name: 大陆专线
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/refs/heads/master/IconSet/Color/China_Map.png"
-    default: 全球直连
+  - name: 🇨🇳大陆专线
     <<: *p1
 
-  - name: 我的Proxy
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/refs/heads/master/IconSet/Color/Proxy.png"
+  - name: 🔱AI
     <<: *p2
 
-  - name: AI
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/refs/heads/master/IconSet/Color/AI.png"
+  - name: 🎮游戏平台
     <<: *p2
 
-  - name: 游戏平台
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/refs/heads/master/IconSet/Color/Game.png"
+  - name: 🎬流媒体
     <<: *p2
 
-  - name: 流媒体
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/refs/heads/master/IconSet/Color/Media.png"
+  - name: 📲社交媒体
     <<: *p2
 
-  - name: 社交媒体
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/refs/heads/master/IconSet/Color/Spark.png"
+  - name: Ⓜ️微软服务
     <<: *p2
 
-  - name: 微软服务
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/refs/heads/master/IconSet/Color/Microsoft.png"
-    default: 全球直连
-    <<: *p2
-
-  - name: 自建节点
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/refs/heads/master/IconSet/Color/Static.png"
+  - name: 💎自建节点
     type: select
     include-all: true
     filter: 自建节点
 
-  - name: 手动切换1
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/refs/heads/master/IconSet/Color/Rocket.png"
+  - name: ️🔘手动切换1
     type: select
     include-all: true
     filter: -顶级
 
-  - name: 手动切换2
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/refs/heads/master/IconSet/Color/Rocket.png"
+  - name: ️🔘手动切换2
     type: select
     include-all: true
     filter: -十元
-
-  - name: 自动选择1
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/refs/heads/master/IconSet/Color/Auto.png"
-    include-all: true
-    filter: -顶级
-    type: url-test
-    url: "https://www.gstatic.com/generate_204"
-    interval: 300
-    tolerance: 50
-
-  - name: 自动选择2
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/refs/heads/master/IconSet/Color/Auto.png"
-    include-all: true
-    filter: -十元
-    type: url-test
-    url: "https://www.gstatic.com/generate_204"
-    interval: 300
-    tolerance: 50
-
-  - name: 全球直连
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/refs/heads/master/IconSet/Color/Direct.png"
-    type: select
-    proxies:
-      - DIRECT
-
-  - name: GLOBAL
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/refs/heads/master/IconSet/Color/Global.png"
-    <<: *p2
 
   #地区分组
   - name: 🇭🇰香港
@@ -156,46 +115,62 @@ proxy-groups:
     type: select
     include-all: true
     filter: "(?i)(?!直连)(韩国)"
+  
+  # 自动和others
+  - name: 🚀自动选择1
+    include-all: true
+    filter: -顶级
+    <<: *puAuto
+
+  - name: 🚀自动选择2
+    include-all: true
+    filter: -十元
+    <<: *puAuto
+
+  - name: 🎯全球直连
+    type: select
+    proxies:
+      - DIRECT
+
+  - name: GLOBAL
+    <<: *p2
 
 rules:
   # 私有
-  - GEOSITE,private,全球直连
-  - GEOIP,private,全球直连
+  - GEOSITE,private,🎯全球直连
+  - GEOIP,private,🎯全球直连
   # 自定义
-  - RULE-SET,direct-ip,全球直连
-  - RULE-SET,direct-domain,全球直连
-  - RULE-SET,proxy-ip,我的Proxy
-  - RULE-SET,proxy-domain,我的Proxy
+  - RULE-SET,direct-ip,🎯全球直连
+  - RULE-SET,direct-domain,🎯全球直连
+  - RULE-SET,proxy-ip,🗺️国际专线
+  - RULE-SET,proxy-domain,🗺️国际专线
   #
-  - GEOSITE,google-gemini,AI
-  - GEOSITE,openai,AI
+  - GEOSITE,google-gemini,🔱AI
+  - GEOSITE,openai,🔱AI
   #
-  - GEOSITE,steam,游戏平台
-  - GEOSITE,category-games,游戏平台
+  - GEOSITE,steam,🎮游戏平台
+  - GEOSITE,category-games,🎮游戏平台
   #
-  - GEOSITE,telegram,社交媒体
-  - GEOIP,telegram,社交媒体
+  - GEOSITE,telegram,📲社交媒体
+  - GEOIP,telegram,📲社交媒体
   #
-  - GEOSITE,netflix,流媒体
-  - GEOSITE,youtube,流媒体
+  - GEOSITE,netflix,🎬流媒体
+  - GEOSITE,youtube,🎬流媒体
   #
-  - GEOSITE,github,国际专线
-  - GEOSITE,google,国际专线
+  - GEOSITE,github,🗺️国际专线
+  - GEOSITE,google,🗺️国际专线
   #
-  - GEOSITE,microsoft,微软服务
-  - GEOSITE,gfw,国际专线
+  - GEOSITE,microsoft,Ⓜ️微软服务
+  - GEOSITE,gfw,🗺️国际专线
   #
-  - GEOSITE,CN,大陆专线
-  - GEOIP,CN,大陆专线
+  - GEOSITE,CN,🇨🇳大陆专线
+  - GEOIP,CN,🇨🇳大陆专线
   #
-  - GEOSITE,geolocation-!cn,国际专线
-  - MATCH,漏网之鱼
+  - GEOSITE,geolocation-!cn,🗺️国际专线
+  - MATCH,🐟漏网之鱼
 
-rule-anchor:
-  ip: &ip { type: http, interval: 86400, behavior: ipcidr, format: text }
-  domain:
-    &domain { type: http, interval: 86400, behavior: domain, format: text }
 rule-providers:
+  # https://github.com/18057700954/meta-rules-list/tree/main
   proxy-ip:
     <<: *ip
     url: "https://raw.githubusercontent.com/18057700954/meta-rules-list/refs/heads/main/proxy_ip.list"
@@ -208,3 +183,4 @@ rule-providers:
   direct-domain:
     <<: *domain
     url: "https://raw.githubusercontent.com/18057700954/meta-rules-list/refs/heads/main/direct_domain.list"
+  # 
